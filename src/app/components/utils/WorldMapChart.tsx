@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 import * as topojson from 'topojson-client';
+import CountryDetailsPanel from '../ui/CountryDetailsPanel';
 
 interface GDPData {
   metadata: {
@@ -37,6 +38,8 @@ interface GDPData {
 
 export default function WorldMapChart() {
   const svgRef = useRef<SVGSVGElement | null>(null);
+  const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
+  const [gdpData, setGdpData] = useState<any>(null);
 
   useEffect(() => {
     const loadMap = async () => {
@@ -61,8 +64,11 @@ export default function WorldMapChart() {
         }
         
         const topology = await geoRes.json();
-        const gdpData: GDPData = await gdpRes.json();
+        const gdpDataLoaded: GDPData = await gdpRes.json();
         const nameMapping: {[key: string]: string} = await mappingRes.json();
+        
+        // Stocker les données GDP pour le panneau d'informations
+        setGdpData(gdpDataLoaded);
         
         console.log('Topology chargée:', topology);
         console.log('Données PIB chargées:', gdpData.metadata);
@@ -79,7 +85,7 @@ export default function WorldMapChart() {
 
         // Créer une map pour associer noms de pays aux codes ISO
         const nameToCode = new Map<string, string>();
-        Object.values(gdpData.countries).forEach(country => {
+        Object.values(gdpDataLoaded.countries).forEach((country: any) => {
           nameToCode.set(country.name, country.code);
           nameToCode.set(country.name.toLowerCase(), country.code);
         });
@@ -107,31 +113,31 @@ export default function WorldMapChart() {
           // 1. Par mapping personnalisé direct
           if (nameMapping[geoName]) {
             countryCode = nameMapping[geoName];
-            if (gdpData.latest_year_data[countryCode]) {
-              gdpValue = gdpData.latest_year_data[countryCode].gdp;
-              year = gdpData.latest_year_data[countryCode].year;
+            if (gdpDataLoaded.latest_year_data[countryCode]) {
+              gdpValue = gdpDataLoaded.latest_year_data[countryCode].gdp;
+              year = gdpDataLoaded.latest_year_data[countryCode].year;
             }
           }
           // 2. Par ID numérique (souvent code ISO-3 numérique)
-          else if (geoId && gdpData.latest_year_data[geoId]) {
-            gdpValue = gdpData.latest_year_data[geoId].gdp;
+          else if (geoId && gdpDataLoaded.latest_year_data[geoId]) {
+            gdpValue = gdpDataLoaded.latest_year_data[geoId].gdp;
             countryCode = geoId;
-            year = gdpData.latest_year_data[geoId].year;
+            year = gdpDataLoaded.latest_year_data[geoId].year;
           }
           // 3. Par nom exact
           else if (nameToCode.has(geoName)) {
             countryCode = nameToCode.get(geoName)!;
-            if (gdpData.latest_year_data[countryCode]) {
-              gdpValue = gdpData.latest_year_data[countryCode].gdp;
-              year = gdpData.latest_year_data[countryCode].year;
+            if (gdpDataLoaded.latest_year_data[countryCode]) {
+              gdpValue = gdpDataLoaded.latest_year_data[countryCode].gdp;
+              year = gdpDataLoaded.latest_year_data[countryCode].year;
             }
           }
           // 4. Par nom en minuscule
           else if (nameToCode.has(geoName.toLowerCase())) {
             countryCode = nameToCode.get(geoName.toLowerCase())!;
-            if (gdpData.latest_year_data[countryCode]) {
-              gdpValue = gdpData.latest_year_data[countryCode].gdp;
-              year = gdpData.latest_year_data[countryCode].year;
+            if (gdpDataLoaded.latest_year_data[countryCode]) {
+              gdpValue = gdpDataLoaded.latest_year_data[countryCode].gdp;
+              year = gdpDataLoaded.latest_year_data[countryCode].year;
             }
           }
           // 5. Recherche approximative pour certains cas
@@ -139,10 +145,10 @@ export default function WorldMapChart() {
             const normalizedName = geoName.toLowerCase().trim();
             for (const [name, code] of nameToCode.entries()) {
               if (name.toLowerCase().includes(normalizedName) || normalizedName.includes(name.toLowerCase())) {
-                if (gdpData.latest_year_data[code]) {
-                  gdpValue = gdpData.latest_year_data[code].gdp;
+                if (gdpDataLoaded.latest_year_data[code]) {
+                  gdpValue = gdpDataLoaded.latest_year_data[code].gdp;
                   countryCode = code;
-                  year = gdpData.latest_year_data[code].year;
+                  year = gdpDataLoaded.latest_year_data[code].year;
                   break;
                 }
               }
@@ -188,8 +194,8 @@ export default function WorldMapChart() {
           const path = d3.geoPath().projection(projection);
 
           // Créer l'échelle de couleurs basée sur le log du PIB (Rouge vif → Bleu vif)
-          const minLogGDP = Math.log10(gdpData.metadata.statistics.min_gdp);
-          const maxLogGDP = Math.log10(gdpData.metadata.statistics.max_gdp);
+          const minLogGDP = Math.log10(gdpDataLoaded.metadata.statistics.min_gdp);
+          const maxLogGDP = Math.log10(gdpDataLoaded.metadata.statistics.max_gdp);
           
           // Échelle de couleurs vives et saturées
           const colorScale = d3.scaleLinear<string>()
@@ -245,19 +251,26 @@ export default function WorldMapChart() {
                   `<strong>${countryName}</strong><br/>
                    Code: ${countryData.code}<br/>
                    PIB (${countryData.year}): $${(countryData.gdp / 1e9).toFixed(1)}B<br/>
-                   PIB complet: $${countryData.gdp.toLocaleString()}` :
+                   PIB complet: $${countryData.gdp.toLocaleString()}<br/>
+                   <em>Cliquez pour plus d'informations</em>` :
                   `<strong>${countryName}</strong><br/>
-                   <em>Données PIB non disponibles</em>`);
+                   <em>Données PIB non disponibles</em><br/>
+                   <em>Cliquez pour plus d'informations</em>`);
 
               tooltip
                 .style('left', (event.pageX + 10) + 'px')
                 .style('top', (event.pageY - 10) + 'px');
             })
             .on('mouseout', function() {
-              // Retirer l'effet hover
-              d3.select(this)
-                .attr('stroke-width', 0.5)
-                .attr('stroke', '#ffffff');
+              // Retirer l'effet hover seulement si ce n'est pas le pays sélectionné
+              const countryName = (this as any).__data__.properties?.NAME || (this as any).__data__.properties?.name || 'Unknown';
+              const countryData = countryDataMap.get(countryName);
+              
+              if (!countryData || selectedCountry !== countryData.code) {
+                d3.select(this)
+                  .attr('stroke-width', 0.5)
+                  .attr('stroke', '#ffffff');
+              }
 
               // Supprimer tooltip
               d3.selectAll('.tooltip').remove();
@@ -267,6 +280,31 @@ export default function WorldMapChart() {
               d3.selectAll('.tooltip')
                 .style('left', (event.pageX + 10) + 'px')
                 .style('top', (event.pageY - 10) + 'px');
+            })
+            .on('click', function(event, d: any) {
+              const countryName = d.properties?.NAME || d.properties?.name || 'Unknown';
+              const countryData = countryDataMap.get(countryName);
+              
+              // Réinitialiser le style de tous les pays
+              svg.selectAll('.country')
+                .attr('stroke-width', 0.5)
+                .attr('stroke', '#ffffff');
+              
+              if (countryData) {
+                // Mettre en surbrillance le pays sélectionné
+                d3.select(this)
+                  .attr('stroke-width', 3)
+                  .attr('stroke', '#ff6b6b');
+                
+                // Mettre à jour le pays sélectionné
+                setSelectedCountry(countryData.code);
+              } else {
+                // Si pas de données, afficher quand même les infos de base
+                setSelectedCountry('world');
+              }
+              
+              // Supprimer tooltip au clic
+              d3.selectAll('.tooltip').remove();
             });
 
           // Ajouter une légende
@@ -275,20 +313,20 @@ export default function WorldMapChart() {
             .attr('transform', `translate(${width - 250}, ${height - 120})`);
 
           // Échelle pour la légende (en milliards de dollars)
-          const minGDPBillions = gdpData.metadata.statistics.min_gdp / 1e9;
-          const maxGDPBillions = gdpData.metadata.statistics.max_gdp / 1e9;
-          const medianGDPBillions = gdpData.metadata.statistics.median_gdp / 1e9;
+          const minGDPBillions = gdpDataLoaded.metadata.statistics.min_gdp / 1e9;
+          const maxGDPBillions = gdpDataLoaded.metadata.statistics.max_gdp / 1e9;
+          const medianGDPBillions = gdpDataLoaded.metadata.statistics.median_gdp / 1e9;
           
           const legendValues = [
             minGDPBillions,
-            gdpData.metadata.statistics.quartiles[0] / 1e9,
+            gdpDataLoaded.metadata.statistics.quartiles[0] / 1e9,
             medianGDPBillions,
-            gdpData.metadata.statistics.quartiles[2] / 1e9,
+            gdpDataLoaded.metadata.statistics.quartiles[2] / 1e9,
             maxGDPBillions
           ];
 
           const legendScale = d3.scaleLinear()
-            .domain([Math.log10(gdpData.metadata.statistics.min_gdp), Math.log10(gdpData.metadata.statistics.max_gdp)])
+            .domain([Math.log10(gdpDataLoaded.metadata.statistics.min_gdp), Math.log10(gdpDataLoaded.metadata.statistics.max_gdp)])
             .range([0, 200]);
 
           // Gradient pour la légende
@@ -362,7 +400,7 @@ export default function WorldMapChart() {
             .style('text-anchor', 'middle')
             .style('font-size', '10px')
             .style('fill', '#666')
-            .text(`${gdpData.metadata.statistics.total_countries} pays • ${gdpData.metadata.statistics.data_years_range[1]}`);
+            .text(`${gdpDataLoaded.metadata.statistics.total_countries} pays • ${gdpDataLoaded.metadata.statistics.data_years_range[1]}`);
 
           console.log('Carte D3.js créée avec succès avec données PIB réelles');
         }
@@ -375,15 +413,38 @@ export default function WorldMapChart() {
   }, []);
 
   return (
-    <div className="w-full h-[80vh] max-h-[800px] bg-white border border-gray-200 rounded-lg shadow-lg p-6">
-      <h2 className="text-xl font-semibold mb-4 text-center text-gray-700">
-        PIB par Pays - Carte Interactive du Monde
-      </h2>
-      <div className="text-sm text-gray-600 mb-3 text-center">
-        Source: Banque mondiale - Données les plus récentes disponibles
-      </div>
-      <div className="w-full h-full flex items-center justify-center">
-        <svg ref={svgRef} className="max-w-full max-h-full"></svg>
+    <div className="w-full h-screen bg-gray-50 p-4">
+      <div className="h-full flex gap-4">
+        {/* Carte principale */}
+        <div className="flex-1 bg-white border border-gray-200 rounded-lg shadow-lg p-6">
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h2 className="text-xl font-semibold text-gray-700">
+                PIB par Pays - Carte Interactive du Monde
+              </h2>
+              <div className="text-sm text-gray-600">
+                Source: Banque mondiale - Données les plus récentes disponibles
+              </div>
+            </div>
+            <button
+              onClick={() => setSelectedCountry(null)}
+              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm"
+            >
+              Vue d'ensemble mondiale
+            </button>
+          </div>
+          <div className="w-full h-full flex items-center justify-center">
+            <svg ref={svgRef} className="max-w-full max-h-full"></svg>
+          </div>
+        </div>
+
+        {/* Panneau d'informations */}
+        <div className="w-96 h-full">
+          <CountryDetailsPanel 
+            selectedCountry={selectedCountry} 
+            gdpData={gdpData}
+          />
+        </div>
       </div>
     </div>
   );
