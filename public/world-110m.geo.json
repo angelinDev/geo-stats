@@ -1,0 +1,45 @@
+{
+  "type": "Topology",
+  "arcs": [],
+  "objects": {
+    "countries": {
+      "type": "GeometryCollection",
+      "geometries": []
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "France",
+        "iso_a3": "FRA"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[-5, 41], [9, 41], [9, 51], [-5, 51], [-5, 41]]]
+      }
+    },
+    {
+      "type": "Feature", 
+      "properties": {
+        "name": "Germany",
+        "iso_a3": "DEU"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[5, 47], [15, 47], [15, 55], [5, 55], [5, 47]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Spain", 
+        "iso_a3": "ESP"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[-10, 35], [4, 35], [4, 44], [-10, 44], [-10, 35]]]
+      }
+    }
+  ]
+}
