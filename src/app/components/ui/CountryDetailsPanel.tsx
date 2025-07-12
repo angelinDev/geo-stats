@@ -301,12 +301,12 @@ export default function CountryDetailsPanel({ countryName, onClose }: CountryDet
   if (loading) {
     return (
       <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center">
-        <div className="bg-white rounded-2xl p-8 max-w-md mx-4">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 max-w-md mx-4">
           <div className="flex items-center space-x-4">
-            <div className="animate-spin w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full"></div>
+            <div className="animate-spin w-8 h-8 border-4 border-blue-600 dark:border-blue-400 border-t-transparent rounded-full"></div>
             <div>
-              <h3 className="text-lg font-semibold text-gray-800">Chargement des données</h3>
-              <p className="text-gray-600">Récupération des statistiques depuis les APIs pour {countryName}...</p>
+              <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Chargement des données</h3>
+              <p className="text-gray-600 dark:text-gray-300">Récupération des statistiques depuis les APIs pour {countryName}...</p>
             </div>
           </div>
         </div>
@@ -317,13 +317,13 @@ export default function CountryDetailsPanel({ countryName, onClose }: CountryDet
   if (error || !countryData) {
     return (
       <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center">
-        <div className="bg-white rounded-2xl p-8 max-w-md mx-4">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 max-w-md mx-4">
           <div className="text-center">
-            <h3 className="text-lg font-semibold text-gray-800 mb-2">Erreur</h3>
-            <p className="text-gray-600 mb-4">{error}</p>
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">Erreur</h3>
+            <p className="text-gray-600 dark:text-gray-300 mb-4">{error}</p>
             <button
               onClick={onClose}
-              className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className="px-6 py-2 bg-blue-600 dark:bg-blue-500 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
             >
               Fermer
             </button>
@@ -346,66 +346,65 @@ export default function CountryDetailsPanel({ countryName, onClose }: CountryDet
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 overflow-y-auto">
       <div className="min-h-screen py-6 px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden">
             {/* Header */}
-            <div className="bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-8 text-white">
+            <div className="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-700 dark:to-purple-700 px-6 py-8 text-white">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-4">
                   <span className="text-6xl">{countryData.basicInfo.flag}</span>
                   <div>
                     <h1 className="text-3xl font-bold">{countryData.basicInfo.name}</h1>
-                    <p className="text-blue-100 text-lg">{countryData.basicInfo.capital} • {countryData.basicInfo.region}</p>
-                    <p className="text-blue-200 text-sm">Population: {formatNumber(countryData.demographics.population)} habitants</p>
+                    <p className="text-blue-100 dark:text-blue-200 text-lg">{countryData.basicInfo.capital} • {countryData.basicInfo.region}</p>
+                    <p className="text-blue-200 dark:text-blue-300 text-sm">Population: {formatNumber(countryData.demographics.population)} habitants</p>
                   </div>
                 </div>
                 <button
                   onClick={onClose}
-                  className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-colors"
+                  className="w-10 h-10 bg-white/20 dark:bg-white/30 rounded-full flex items-center justify-center hover:bg-white/30 dark:hover:bg-white/40 transition-colors"
                 >
                   <X className="w-6 h-6" />
                 </button>
               </div>
             </div>
 
-            <div className="p-6">
-              {/* Informations de base */}
+            <div className="p-6 dark:bg-gray-800">{/* Informations de base */}
               <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-                <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl p-4">
+                <div className="bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/30 rounded-xl p-4">
                   <div className="flex items-center space-x-3">
-                    <MapPin className="w-8 h-8 text-blue-600" />
+                    <MapPin className="w-8 h-8 text-blue-600 dark:text-blue-400" />
                     <div>
-                      <p className="text-sm text-blue-800 font-medium">Superficie</p>
-                      <p className="text-xl font-bold text-blue-900">{countryData.basicInfo.area.toLocaleString()} km²</p>
+                      <p className="text-sm text-blue-800 dark:text-blue-300 font-medium">Superficie</p>
+                      <p className="text-xl font-bold text-blue-900 dark:text-blue-100">{countryData.basicInfo.area.toLocaleString()} km²</p>
                     </div>
                   </div>
                 </div>
                 
-                <div className="bg-gradient-to-r from-green-50 to-green-100 rounded-xl p-4">
+                <div className="bg-gradient-to-r from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/30 rounded-xl p-4">
                   <div className="flex items-center space-x-3">
-                    <Users className="w-8 h-8 text-green-600" />
+                    <Users className="w-8 h-8 text-green-600 dark:text-green-400" />
                     <div>
-                      <p className="text-sm text-green-800 font-medium">Densité</p>
-                      <p className="text-xl font-bold text-green-900">{countryData.demographics.populationDensity} hab/km²</p>
+                      <p className="text-sm text-green-800 dark:text-green-300 font-medium">Densité</p>
+                      <p className="text-xl font-bold text-green-900 dark:text-green-100">{countryData.demographics.populationDensity} hab/km²</p>
                     </div>
                   </div>
                 </div>
                 
-                <div className="bg-gradient-to-r from-orange-50 to-orange-100 rounded-xl p-4">
+                <div className="bg-gradient-to-r from-orange-50 to-orange-100 dark:from-orange-900/30 dark:to-orange-800/30 rounded-xl p-4">
                   <div className="flex items-center space-x-3">
-                    <DollarSign className="w-8 h-8 text-orange-600" />
+                    <DollarSign className="w-8 h-8 text-orange-600 dark:text-orange-400" />
                     <div>
-                      <p className="text-sm text-orange-800 font-medium">PIB/habitant</p>
-                      <p className="text-xl font-bold text-orange-900">${countryData.economy.gdpPerCapita.toLocaleString()}</p>
+                      <p className="text-sm text-orange-800 dark:text-orange-300 font-medium">PIB/habitant</p>
+                      <p className="text-xl font-bold text-orange-900 dark:text-orange-100">${countryData.economy.gdpPerCapita.toLocaleString()}</p>
                     </div>
                   </div>
                 </div>
                 
-                <div className="bg-gradient-to-r from-purple-50 to-purple-100 rounded-xl p-4">
+                <div className="bg-gradient-to-r from-purple-50 to-purple-100 dark:from-purple-900/30 dark:to-purple-800/30 rounded-xl p-4">
                   <div className="flex items-center space-x-3">
-                    <Heart className="w-8 h-8 text-purple-600" />
+                    <Heart className="w-8 h-8 text-purple-600 dark:text-purple-400" />
                     <div>
-                      <p className="text-sm text-purple-800 font-medium">Espérance de vie</p>
-                      <p className="text-xl font-bold text-purple-900">{countryData.demographics.lifeExpectancy.toFixed(1)} ans</p>
+                      <p className="text-sm text-purple-800 dark:text-purple-300 font-medium">Espérance de vie</p>
+                      <p className="text-xl font-bold text-purple-900 dark:text-purple-100">{countryData.demographics.lifeExpectancy.toFixed(1)} ans</p>
                     </div>
                   </div>
                 </div>
@@ -414,10 +413,10 @@ export default function CountryDetailsPanel({ countryName, onClose }: CountryDet
               {/* Graphiques principaux */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
                 {/* Répartition par âge */}
-                <div className="bg-white rounded-xl border border-gray-200 p-6">
+                <div className="bg-white dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600 p-6">
                   <div className="flex items-center space-x-2 mb-4">
-                    <Baby className="w-5 h-5 text-blue-600" />
-                    <h3 className="text-lg font-semibold text-gray-800">Répartition par Âge</h3>
+                    <Baby className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                    <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Répartition par Âge</h3>
                   </div>
                   <ResponsiveContainer width="100%" height={250}>
                     <PieChart>
@@ -435,24 +434,40 @@ export default function CountryDetailsPanel({ countryName, onClose }: CountryDet
                           <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                         ))}
                       </Pie>
-                      <Tooltip formatter={(value) => [`${Number(value).toFixed(1)}%`, 'Pourcentage']} />
+                      <Tooltip 
+                        formatter={(value) => [`${Number(value).toFixed(1)}%`, 'Pourcentage']} 
+                        contentStyle={{
+                          backgroundColor: '#374151',
+                          border: '1px solid #6b7280',
+                          borderRadius: '8px',
+                          color: '#f9fafb'
+                        }}
+                      />
                     </PieChart>
                   </ResponsiveContainer>
                 </div>
 
                 {/* Secteurs économiques */}
-                <div className="bg-white rounded-xl border border-gray-200 p-6">
+                <div className="bg-white dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600 p-6">
                   <div className="flex items-center space-x-2 mb-4">
-                    <Building2 className="w-5 h-5 text-green-600" />
-                    <h3 className="text-lg font-semibold text-gray-800">Secteurs Économiques</h3>
+                    <Building2 className="w-5 h-5 text-green-600 dark:text-green-400" />
+                    <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Secteurs Économiques</h3>
                   </div>
                   <ResponsiveContainer width="100%" height={250}>
                     <BarChart data={countryData.economy.economicSectors}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="name" fontSize={12} />
-                      <YAxis fontSize={12} />
-                      <Tooltip formatter={(value) => [`${Number(value).toFixed(1)}%`, 'Part du PIB']} />
-                      <Bar dataKey="value" fill="#3b82f6" radius={[4, 4, 0, 0]} />
+                      <CartesianGrid strokeDasharray="3 3" stroke="#4b5563" />
+                      <XAxis dataKey="name" fontSize={12} tick={{ fill: '#f9fafb' }} />
+                      <YAxis fontSize={12} tick={{ fill: '#f9fafb' }} />
+                      <Tooltip 
+                        formatter={(value) => [`${Number(value).toFixed(1)}%`, 'Part du PIB']} 
+                        contentStyle={{
+                          backgroundColor: '#374151',
+                          border: '1px solid #6b7280',
+                          borderRadius: '8px',
+                          color: '#f9fafb'
+                        }}
+                      />
+                      <Bar dataKey="value" fill="#60a5fa" radius={[4, 4, 0, 0]} />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
@@ -461,18 +476,26 @@ export default function CountryDetailsPanel({ countryName, onClose }: CountryDet
               {/* Évolution du PIB */}
               {countryData.economy.historicalGdp.length > 0 && (
                 <div className="mb-8">
-                  <div className="bg-white rounded-xl border border-gray-200 p-6">
+                  <div className="bg-white dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600 p-6">
                     <div className="flex items-center space-x-2 mb-4">
-                      <TrendingUp className="w-5 h-5 text-green-600" />
-                      <h3 className="text-lg font-semibold text-gray-800">Évolution du PIB (10 dernières années)</h3>
+                      <TrendingUp className="w-5 h-5 text-green-600 dark:text-green-400" />
+                      <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Évolution du PIB (10 dernières années)</h3>
                     </div>
                     <ResponsiveContainer width="100%" height={250}>
                       <LineChart data={countryData.economy.historicalGdp}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="year" />
-                        <YAxis />
-                        <Tooltip formatter={(value) => [`${Number(value).toFixed(1)}B $`, 'PIB']} />
-                        <Line type="monotone" dataKey="value" stroke="#10b981" strokeWidth={2} />
+                        <CartesianGrid strokeDasharray="3 3" stroke="#4b5563" />
+                        <XAxis dataKey="year" tick={{ fill: '#f9fafb' }} />
+                        <YAxis tick={{ fill: '#f9fafb' }} />
+                        <Tooltip 
+                          formatter={(value) => [`${Number(value).toFixed(1)}B $`, 'PIB']} 
+                          contentStyle={{
+                            backgroundColor: '#374151',
+                            border: '1px solid #6b7280',
+                            borderRadius: '8px',
+                            color: '#f9fafb'
+                          }}
+                        />
+                        <Line type="monotone" dataKey="value" stroke="#34d399" strokeWidth={2} />
                       </LineChart>
                     </ResponsiveContainer>
                   </div>
@@ -482,91 +505,91 @@ export default function CountryDetailsPanel({ countryName, onClose }: CountryDet
               {/* Indicateurs détaillés */}
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
                 {/* Indicateurs démographiques */}
-                <div className="bg-white rounded-xl border border-gray-200 p-6">
+                <div className="bg-white dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600 p-6">
                   <div className="flex items-center space-x-2 mb-4">
-                    <Users className="w-5 h-5 text-blue-600" />
-                    <h3 className="text-lg font-semibold text-gray-800">Démographie</h3>
+                    <Users className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                    <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Démographie</h3>
                   </div>
                   <div className="space-y-4">
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Âge médian</span>
-                      <span className="font-semibold">{countryData.demographics.medianAge.toFixed(1)} ans</span>
+                      <span className="text-gray-600 dark:text-gray-300">Âge médian</span>
+                      <span className="font-semibold dark:text-white">{countryData.demographics.medianAge.toFixed(1)} ans</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Taux de natalité</span>
-                      <span className="font-semibold">{countryData.demographics.birthRate.toFixed(1)}‰</span>
+                      <span className="text-gray-600 dark:text-gray-300">Taux de natalité</span>
+                      <span className="font-semibold dark:text-white">{countryData.demographics.birthRate.toFixed(1)}‰</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Taux de mortalité</span>
-                      <span className="font-semibold">{countryData.demographics.deathRate.toFixed(1)}‰</span>
+                      <span className="text-gray-600 dark:text-gray-300">Taux de mortalité</span>
+                      <span className="font-semibold dark:text-white">{countryData.demographics.deathRate.toFixed(1)}‰</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Fécondité</span>
-                      <span className="font-semibold">{countryData.demographics.fertilityRate.toFixed(2)} enfants/femme</span>
+                      <span className="text-gray-600 dark:text-gray-300">Fécondité</span>
+                      <span className="font-semibold dark:text-white">{countryData.demographics.fertilityRate.toFixed(2)} enfants/femme</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Population urbaine</span>
-                      <span className="font-semibold">{countryData.demographics.urbanPopulation.toFixed(1)}%</span>
+                      <span className="text-gray-600 dark:text-gray-300">Population urbaine</span>
+                      <span className="font-semibold dark:text-white">{countryData.demographics.urbanPopulation.toFixed(1)}%</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Indicateurs économiques */}
-                <div className="bg-white rounded-xl border border-gray-200 p-6">
+                <div className="bg-white dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600 p-6">
                   <div className="flex items-center space-x-2 mb-4">
-                    <TrendingUp className="w-5 h-5 text-green-600" />
-                    <h3 className="text-lg font-semibold text-gray-800">Économie</h3>
+                    <TrendingUp className="w-5 h-5 text-green-600 dark:text-green-400" />
+                    <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Économie</h3>
                   </div>
                   <div className="space-y-4">
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-600">PIB total</span>
-                      <span className="font-semibold">${formatNumber(countryData.economy.gdp)}</span>
+                      <span className="text-gray-600 dark:text-gray-300">PIB total</span>
+                      <span className="font-semibold dark:text-white">${formatNumber(countryData.economy.gdp)}</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Croissance PIB</span>
-                      <span className="font-semibold text-green-600">+{countryData.economy.gdpGrowthRate.toFixed(1)}%</span>
+                      <span className="text-gray-600 dark:text-gray-300">Croissance PIB</span>
+                      <span className="font-semibold text-green-600 dark:text-green-400">+{countryData.economy.gdpGrowthRate.toFixed(1)}%</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Inflation</span>
-                      <span className="font-semibold text-orange-600">{countryData.economy.inflation.toFixed(1)}%</span>
+                      <span className="text-gray-600 dark:text-gray-300">Inflation</span>
+                      <span className="font-semibold text-orange-600 dark:text-orange-400">{countryData.economy.inflation.toFixed(1)}%</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Chômage</span>
-                      <span className="font-semibold text-red-600">{countryData.economy.unemployment.toFixed(1)}%</span>
+                      <span className="text-gray-600 dark:text-gray-300">Chômage</span>
+                      <span className="font-semibold text-red-600 dark:text-red-400">{countryData.economy.unemployment.toFixed(1)}%</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Dette publique</span>
-                      <span className="font-semibold">{countryData.economy.publicDebt.toFixed(1)}% PIB</span>
+                      <span className="text-gray-600 dark:text-gray-300">Dette publique</span>
+                      <span className="font-semibold dark:text-white">{countryData.economy.publicDebt.toFixed(1)}% PIB</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Indicateurs sociaux */}
-                <div className="bg-white rounded-xl border border-gray-200 p-6">
+                <div className="bg-white dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600 p-6">
                   <div className="flex items-center space-x-2 mb-4">
-                    <GraduationCap className="w-5 h-5 text-purple-600" />
-                    <h3 className="text-lg font-semibold text-gray-800">Social</h3>
+                    <GraduationCap className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+                    <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Social</h3>
                   </div>
                   <div className="space-y-4">
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Alphabétisation</span>
-                      <span className="font-semibold">{countryData.social.literacyRate.toFixed(1)}%</span>
+                      <span className="text-gray-600 dark:text-gray-300">Alphabétisation</span>
+                      <span className="font-semibold dark:text-white">{countryData.social.literacyRate.toFixed(1)}%</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-600">IDH</span>
-                      <span className="font-semibold">{countryData.social.humanDevelopmentIndex.toFixed(3)}</span>
+                      <span className="text-gray-600 dark:text-gray-300">IDH</span>
+                      <span className="font-semibold dark:text-white">{countryData.social.humanDevelopmentIndex.toFixed(3)}</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Coefficient Gini</span>
-                      <span className="font-semibold">{countryData.social.giniCoefficient.toFixed(1)}</span>
+                      <span className="text-gray-600 dark:text-gray-300">Coefficient Gini</span>
+                      <span className="font-semibold dark:text-white">{countryData.social.giniCoefficient.toFixed(1)}</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Internet</span>
-                      <span className="font-semibold">{countryData.social.internetPenetration.toFixed(1)}%</span>
+                      <span className="text-gray-600 dark:text-gray-300">Internet</span>
+                      <span className="font-semibold dark:text-white">{countryData.social.internetPenetration.toFixed(1)}%</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Santé (% PIB)</span>
-                      <span className="font-semibold">{countryData.social.healthcareExpenditure.toFixed(1)}%</span>
+                      <span className="text-gray-600 dark:text-gray-300">Santé (% PIB)</span>
+                      <span className="font-semibold dark:text-white">{countryData.social.healthcareExpenditure.toFixed(1)}%</span>
                     </div>
                   </div>
                 </div>
@@ -574,48 +597,48 @@ export default function CountryDetailsPanel({ countryName, onClose }: CountryDet
 
               {/* Indicateurs environnementaux */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-                <div className="bg-white rounded-xl border border-gray-200 p-6">
+                <div className="bg-white dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600 p-6">
                   <div className="flex items-center space-x-2 mb-4">
-                    <Leaf className="w-5 h-5 text-green-600" />
-                    <h3 className="text-lg font-semibold text-gray-800">Environnement</h3>
+                    <Leaf className="w-5 h-5 text-green-600 dark:text-green-400" />
+                    <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Environnement</h3>
                   </div>
                   <div className="space-y-4">
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-600">CO₂ (t/hab/an)</span>
-                      <span className="font-semibold">{countryData.environment.co2Emissions.toFixed(1)}</span>
+                      <span className="text-gray-600 dark:text-gray-300">CO₂ (t/hab/an)</span>
+                      <span className="font-semibold dark:text-white">{countryData.environment.co2Emissions.toFixed(1)}</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Énergies renouvelables</span>
-                      <span className="font-semibold text-green-600">{countryData.environment.renewableEnergy.toFixed(1)}%</span>
+                      <span className="text-gray-600 dark:text-gray-300">Énergies renouvelables</span>
+                      <span className="font-semibold text-green-600 dark:text-green-400">{countryData.environment.renewableEnergy.toFixed(1)}%</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Couverture forestière</span>
-                      <span className="font-semibold">{countryData.environment.forestCoverage.toFixed(1)}%</span>
+                      <span className="text-gray-600 dark:text-gray-300">Couverture forestière</span>
+                      <span className="font-semibold dark:text-white">{countryData.environment.forestCoverage.toFixed(1)}%</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Accès eau potable</span>
-                      <span className="font-semibold">{countryData.environment.waterAccess.toFixed(1)}%</span>
+                      <span className="text-gray-600 dark:text-gray-300">Accès eau potable</span>
+                      <span className="font-semibold dark:text-white">{countryData.environment.waterAccess.toFixed(1)}%</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-white rounded-xl border border-gray-200 p-6">
+                <div className="bg-white dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600 p-6">
                   <div className="flex items-center space-x-2 mb-4">
-                    <Scale className="w-5 h-5 text-orange-600" />
-                    <h3 className="text-lg font-semibold text-gray-800">Gouvernance</h3>
+                    <Scale className="w-5 h-5 text-orange-600 dark:text-orange-400" />
+                    <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Gouvernance</h3>
                   </div>
                   <div className="space-y-4">
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Indice corruption</span>
-                      <span className="font-semibold">{countryData.governance.corruptionIndex.toFixed(0)}/100</span>
+                      <span className="text-gray-600 dark:text-gray-300">Indice corruption</span>
+                      <span className="font-semibold dark:text-white">{countryData.governance.corruptionIndex.toFixed(0)}/100</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Indice démocratie</span>
-                      <span className="font-semibold">{countryData.governance.democracyIndex.toFixed(2)}/10</span>
+                      <span className="text-gray-600 dark:text-gray-300">Indice démocratie</span>
+                      <span className="font-semibold dark:text-white">{countryData.governance.democracyIndex.toFixed(2)}/10</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Liberté de presse</span>
-                      <span className="font-semibold">{countryData.governance.pressFreedowIndex.toFixed(0)}/100</span>
+                      <span className="text-gray-600 dark:text-gray-300">Liberté de presse</span>
+                      <span className="font-semibold dark:text-white">{countryData.governance.pressFreedowIndex.toFixed(0)}/100</span>
                     </div>
                   </div>
                 </div>
@@ -623,10 +646,10 @@ export default function CountryDetailsPanel({ countryName, onClose }: CountryDet
 
               {/* Indicateurs de qualité de vie */}
               <div className="mb-8">
-                <div className="bg-white rounded-xl border border-gray-200 p-6">
+                <div className="bg-white dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600 p-6">
                   <div className="flex items-center space-x-2 mb-6">
-                    <Award className="w-5 h-5 text-orange-600" />
-                    <h3 className="text-lg font-semibold text-gray-800">Indicateurs de Qualité de Vie</h3>
+                    <Award className="w-5 h-5 text-orange-600 dark:text-orange-400" />
+                    <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Indicateurs de Qualité de Vie</h3>
                   </div>
                   <ResponsiveContainer width="100%" height={200}>
                     <RadialBarChart cx="50%" cy="50%" innerRadius="20%" outerRadius="80%" barSize={20} data={countryData.social.socialIndicators}>
@@ -635,7 +658,15 @@ export default function CountryDetailsPanel({ countryName, onClose }: CountryDet
                         background
                         dataKey="value"
                       />
-                      <Tooltip formatter={(value) => [`${Number(value).toFixed(0)}/100`, 'Score']} />
+                      <Tooltip 
+                        formatter={(value) => [`${Number(value).toFixed(0)}/100`, 'Score']} 
+                        contentStyle={{
+                          backgroundColor: '#374151',
+                          border: '1px solid #6b7280',
+                          borderRadius: '8px',
+                          color: '#f9fafb'
+                        }}
+                      />
                     </RadialBarChart>
                   </ResponsiveContainer>
                 </div>
@@ -643,14 +674,14 @@ export default function CountryDetailsPanel({ countryName, onClose }: CountryDet
 
               {/* Informations supplémentaires */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-semibold mb-2">Langues officielles</h4>
-                  <p className="text-gray-700">{countryData.basicInfo.languages.join(', ') || 'N/A'}</p>
+                <div className="bg-gray-50 dark:bg-gray-600 p-4 rounded-lg">
+                  <h4 className="font-semibold mb-2 dark:text-white">Langues officielles</h4>
+                  <p className="text-gray-700 dark:text-gray-200">{countryData.basicInfo.languages.join(', ') || 'N/A'}</p>
                 </div>
                 
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-semibold mb-2">Monnaies</h4>
-                  <p className="text-gray-700">{countryData.basicInfo.currencies.join(', ') || 'N/A'}</p>
+                <div className="bg-gray-50 dark:bg-gray-600 p-4 rounded-lg">
+                  <h4 className="font-semibold mb-2 dark:text-white">Monnaies</h4>
+                  <p className="text-gray-700 dark:text-gray-200">{countryData.basicInfo.currencies.join(', ') || 'N/A'}</p>
                 </div>
               </div>
             </div>

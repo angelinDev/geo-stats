@@ -303,9 +303,9 @@ export default function UltraModernWorldMap() {
   const COLORS = ['#3b82f6', '#ef4444', '#10b981', '#f59e0b', '#8b5cf6', '#06b6d4'];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 transition-colors duration-300">
       {/* Header moderne */}
-      <div className="bg-white/80 backdrop-blur-lg border-b border-white/20 shadow-xl">
+      <div className="bg-gray-800/80 backdrop-blur-lg border-b border-gray-700/20 shadow-xl">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
@@ -316,14 +316,14 @@ export default function UltraModernWorldMap() {
                 <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                   Atlas Économique Mondial
                 </h1>
-                <p className="text-gray-600">Données économiques mondiales en temps réel</p>
+                <p className="text-gray-300">Données économiques mondiales en temps réel</p>
               </div>
             </div>
             
             <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2 bg-green-100 px-4 py-2 rounded-full">
-                <Activity className="w-4 h-4 text-green-600" />
-                <span className="text-green-800 font-medium">Live</span>
+              <div className="flex items-center space-x-2 bg-green-900/30 px-4 py-2 rounded-full">
+                <Activity className="w-4 h-4 text-green-400" />
+                <span className="text-green-200 font-medium">Live</span>
               </div>
             </div>
           </div>
@@ -333,12 +333,12 @@ export default function UltraModernWorldMap() {
       <div className="max-w-7xl mx-auto px-6 py-8">
         {/* Statistiques globales modernes */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white/80 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-xl">
+          <div className="bg-gray-800/80 backdrop-blur-lg rounded-2xl p-6 border border-gray-700/20 shadow-xl">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-600 text-sm font-medium">PIB Mondial Total</p>
-                <p className="text-3xl font-bold text-blue-600">${formatNumber(demoGlobalStats.totalGDP)}</p>
-                <p className="text-green-600 text-sm font-medium">+3.2% cette année</p>
+                <p className="text-gray-300 text-sm font-medium">PIB Mondial Total</p>
+                <p className="text-3xl font-bold text-blue-400">${formatNumber(demoGlobalStats.totalGDP)}</p>
+                <p className="text-green-400 text-sm font-medium">+3.2% cette année</p>
               </div>
               <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
                 <DollarSign className="w-6 h-6 text-white" />
@@ -346,12 +346,12 @@ export default function UltraModernWorldMap() {
             </div>
           </div>
 
-          <div className="bg-white/80 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-xl">
+          <div className="bg-gray-800/80 backdrop-blur-lg rounded-2xl p-6 border border-gray-700/20 shadow-xl">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-600 text-sm font-medium">Population Mondiale</p>
-                <p className="text-3xl font-bold text-green-600">{formatNumber(demoGlobalStats.totalPopulation)}</p>
-                <p className="text-blue-600 text-sm font-medium">+0.9% cette année</p>
+                <p className="text-gray-300 text-sm font-medium">Population Mondiale</p>
+                <p className="text-3xl font-bold text-green-400">{formatNumber(demoGlobalStats.totalPopulation)}</p>
+                <p className="text-blue-400 text-sm font-medium">+0.9% cette année</p>
               </div>
               <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-green-600 rounded-xl flex items-center justify-center">
                 <Users className="w-6 h-6 text-white" />
@@ -359,12 +359,12 @@ export default function UltraModernWorldMap() {
             </div>
           </div>
 
-          <div className="bg-white/80 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-xl">
+          <div className="bg-gray-800/80 backdrop-blur-lg rounded-2xl p-6 border border-gray-700/20 shadow-xl">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-600 text-sm font-medium">Nombre de Pays</p>
-                <p className="text-3xl font-bold text-purple-600">{demoGlobalStats.totalCountries}</p>
-                <p className="text-gray-500 text-sm font-medium">Avec données PIB</p>
+                <p className="text-gray-300 text-sm font-medium">Nombre de Pays</p>
+                <p className="text-3xl font-bold text-purple-400">{demoGlobalStats.totalCountries}</p>
+                <p className="text-gray-400 text-sm font-medium">Avec données PIB</p>
               </div>
               <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl flex items-center justify-center">
                 <Globe className="w-6 h-6 text-white" />
@@ -372,12 +372,12 @@ export default function UltraModernWorldMap() {
             </div>
           </div>
 
-          <div className="bg-white/80 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-xl">
+          <div className="bg-gray-800/80 backdrop-blur-lg rounded-2xl p-6 border border-gray-700/20 shadow-xl">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-600 text-sm font-medium">PIB Moyen</p>
-                <p className="text-3xl font-bold text-orange-600">${formatNumber(demoGlobalStats.averageGDP)}</p>
-                <p className="text-orange-600 text-sm font-medium">Par pays</p>
+                <p className="text-gray-300 text-sm font-medium">PIB Moyen</p>
+                <p className="text-3xl font-bold text-orange-400">${formatNumber(demoGlobalStats.averageGDP)}</p>
+                <p className="text-orange-400 text-sm font-medium">Par pays</p>
               </div>
               <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-orange-600 rounded-xl flex items-center justify-center">
                 <TrendingUp className="w-6 h-6 text-white" />
@@ -387,28 +387,28 @@ export default function UltraModernWorldMap() {
         </div>
 
         {/* Carte principale */}
-        <div className="bg-white/80 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-xl mb-8">
+        <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg rounded-2xl p-6 border border-white/20 dark:border-gray-700/20 shadow-xl mb-8">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-gray-800">Carte Interactive Mondiale</h2>
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100">Carte Interactive Mondiale</h2>
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2">
                 <Activity className="w-5 h-5 text-green-500" />
-                <span className="text-gray-600">Données économiques 2024</span>
+                <span className="text-gray-600 dark:text-gray-300">Données économiques 2024</span>
               </div>
               {/* Légende PIB */}
               <div className="flex items-center space-x-2 text-sm">
-                <span className="text-gray-600">PIB:</span>
+                <span className="text-gray-600 dark:text-gray-300">PIB:</span>
                 <div className="flex items-center space-x-1">
-                  <div className="w-4 h-4 bg-yellow-200 rounded"></div>
-                  <span className="text-xs text-gray-500">Faible</span>
+                  <div className="w-4 h-4 bg-yellow-200 dark:bg-yellow-600 rounded"></div>
+                  <span className="text-xs text-gray-500 dark:text-gray-400">Faible</span>
                 </div>
                 <div className="flex items-center space-x-1">
-                  <div className="w-4 h-4 bg-orange-400 rounded"></div>
-                  <span className="text-xs text-gray-500">Moyen</span>
+                  <div className="w-4 h-4 bg-orange-400 dark:bg-orange-500 rounded"></div>
+                  <span className="text-xs text-gray-500 dark:text-gray-400">Moyen</span>
                 </div>
                 <div className="flex items-center space-x-1">
                   <div className="w-4 h-4 bg-red-600 rounded"></div>
-                  <span className="text-xs text-gray-500">Élevé</span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400">Élevé</span>
                 </div>
               </div>
             </div>
@@ -416,12 +416,12 @@ export default function UltraModernWorldMap() {
           
           <div className="relative">
             {/* Instructions pour l'utilisateur */}
-            <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-xl">
-              <p className="text-blue-800 text-sm font-medium flex items-center">
+            <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700/50 rounded-xl">
+              <p className="text-blue-800 dark:text-blue-200 text-sm font-medium flex items-center">
                 <Globe className="w-4 h-4 mr-2" />
                 Cliquez sur un pays pour voir ses statistiques détaillées
                 {selectedCountry && (
-                  <span className="ml-4 px-3 py-1 bg-blue-200 text-blue-800 rounded-full text-xs font-bold">
+                  <span className="ml-4 px-3 py-1 bg-blue-200 dark:bg-blue-700 text-blue-800 dark:text-blue-200 rounded-full text-xs font-bold">
                     Pays sélectionné: {selectedCountry}
                   </span>
                 )}
@@ -429,39 +429,40 @@ export default function UltraModernWorldMap() {
             </div>
             
             {loading && (
-              <div className="absolute inset-0 bg-white/50 backdrop-blur-sm rounded-xl flex items-center justify-center z-10">
+              <div className="absolute inset-0 bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm rounded-xl flex items-center justify-center z-10">
                 <div className="flex items-center space-x-3">
                   <div className="animate-spin w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full"></div>
-                  <span className="text-blue-600 font-medium">Chargement de la carte...</span>
+                  <span className="text-blue-600 dark:text-blue-400 font-medium">Chargement de la carte...</span>
                 </div>
               </div>
             )}
             
-            <svg ref={svgRef} className="w-full rounded-xl border border-gray-200"></svg>
+            <svg ref={svgRef} className="w-full rounded-xl border border-gray-200 dark:border-gray-700"></svg>
           </div>
         </div>
 
         {/* Graphiques et analyses */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Top 5 des économies */}
-          <div className="bg-white/80 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-xl">
+          <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg rounded-2xl p-6 border border-white/20 dark:border-gray-700/20 shadow-xl">
             <div className="flex items-center space-x-3 mb-6">
-              <Target className="w-6 h-6 text-blue-600" />
-              <h3 className="text-xl font-bold text-gray-800">Top 5 des Économies Mondiales</h3>
+              <Target className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+              <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100">Top 5 des Économies Mondiales</h3>
             </div>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={demoGlobalStats.topEconomies}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
-                <XAxis dataKey="name" fontSize={12} />
-                <YAxis fontSize={12} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+                <XAxis dataKey="name" fontSize={12} stroke="#9ca3af" />
+                <YAxis fontSize={12} stroke="#9ca3af" />
                 <Tooltip 
                   formatter={(value) => [`$${value}T`, 'PIB']}
-                  labelStyle={{ color: '#374151' }}
+                  labelStyle={{ color: '#f3f4f6' }}
                   contentStyle={{ 
-                    backgroundColor: 'rgba(255, 255, 255, 0.95)', 
+                    backgroundColor: 'rgba(31, 41, 55, 0.95)', 
                     border: 'none', 
                     borderRadius: '12px',
-                    boxShadow: '0 10px 25px rgba(0, 0, 0, 0.15)'
+                    boxShadow: '0 10px 25px rgba(0, 0, 0, 0.15)',
+                    color: '#f3f4f6'
                   }}
                 />
                 <Bar dataKey="gdp" fill="#3b82f6" radius={[8, 8, 0, 0]} />
@@ -470,10 +471,10 @@ export default function UltraModernWorldMap() {
           </div>
 
           {/* Évolution économique */}
-          <div className="bg-white/80 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-xl">
+          <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg rounded-2xl p-6 border border-white/20 dark:border-gray-700/20 shadow-xl">
             <div className="flex items-center space-x-3 mb-6">
-              <TrendingUp className="w-6 h-6 text-green-600" />
-              <h3 className="text-xl font-bold text-gray-800">Évolution du PIB Mondial</h3>
+              <TrendingUp className="w-6 h-6 text-green-600 dark:text-green-400" />
+              <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100">Évolution du PIB Mondial</h3>
             </div>
             <ResponsiveContainer width="100%" height={300}>
               <AreaChart data={economicTrends}>
@@ -508,10 +509,10 @@ export default function UltraModernWorldMap() {
           </div>
 
           {/* Répartition par continent */}
-          <div className="bg-white/80 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-xl">
+          <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg rounded-2xl p-6 border border-white/20 dark:border-gray-700/20 shadow-xl">
             <div className="flex items-center space-x-3 mb-6">
-              <Building2 className="w-6 h-6 text-purple-600" />
-              <h3 className="text-xl font-bold text-gray-800">Répartition du PIB par Continent</h3>
+              <Building2 className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+              <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100">Répartition du PIB par Continent</h3>
             </div>
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
@@ -543,10 +544,10 @@ export default function UltraModernWorldMap() {
           </div>
 
           {/* Indicateurs économiques */}
-          <div className="bg-white/80 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-xl">
+          <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg rounded-2xl p-6 border border-white/20 dark:border-gray-700/20 shadow-xl">
             <div className="flex items-center space-x-3 mb-6">
-              <Activity className="w-6 h-6 text-red-600" />
-              <h3 className="text-xl font-bold text-gray-800">Indicateurs Économiques</h3>
+              <Activity className="w-6 h-6 text-red-600 dark:text-red-400" />
+              <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100">Indicateurs Économiques</h3>
             </div>
             <ResponsiveContainer width="100%" height={300}>
               <LineChart data={economicTrends}>
