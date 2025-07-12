@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 import * as topojson from 'topojson-client';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell, AreaChart, Area } from 'recharts';
-import { Globe, Users, DollarSign, TrendingUp, Building2, Zap, Activity, Target, ArrowUp, ArrowDown } from 'lucide-react';
-import FloatingDashboard from './FloatingDashboard';
+import { Globe, Users, DollarSign, TrendingUp, Building2, Activity, Target } from 'lucide-react';
+import CountryDetailsPanel from './ui/CountryDetailsPanel';
 
 export default function UltraModernWorldMap() {
   const svgRef = useRef<SVGSVGElement | null>(null);
@@ -14,7 +14,7 @@ export default function UltraModernWorldMap() {
   const [worldData, setWorldData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
-  // Données simulées pour demo immédiate
+  // Données mondiales de démonstration
   const demoGlobalStats = {
     totalCountries: 195,
     totalGDP: 104000000000000, // 104 trillion USD
@@ -44,29 +44,6 @@ export default function UltraModernWorldMap() {
     { year: 2022, gdp: 100.8, inflation: 7.1, unemployment: 5.2 },
     { year: 2023, gdp: 104.0, inflation: 4.8, unemployment: 4.9 },
     { year: 2024, gdp: 107.2, inflation: 3.2, unemployment: 4.6 }
-  ];
-
-  // Ajouter des données de marchés financiers simulées
-  const marketData = [
-    { name: 'NYSE', value: 45820, change: +2.3, color: '#10b981' },
-    { name: 'NASDAQ', value: 14550, change: +1.8, color: '#3b82f6' },
-    { name: 'FTSE', value: 7650, change: -0.5, color: '#ef4444' },
-    { name: 'Nikkei', value: 28400, change: +0.9, color: '#f59e0b' },
-    { name: 'DAX', value: 15900, change: +1.2, color: '#8b5cf6' }
-  ];
-
-  // Données de cryptomonnaies simulées
-  const cryptoData = [
-    { name: 'Bitcoin', symbol: 'BTC', price: 45200, change: +3.2 },
-    { name: 'Ethereum', symbol: 'ETH', price: 3100, change: +2.8 },
-    { name: 'Cardano', symbol: 'ADA', price: 1.25, change: -1.5 }
-  ];
-
-  // Données de matières premières
-  const commodityData = [
-    { name: 'Or', price: 1985, change: +0.8, unit: '$/oz' },
-    { name: 'Pétrole', price: 78.50, change: +2.1, unit: '$/bbl' },
-    { name: 'Argent', price: 24.30, change: -0.3, unit: '$/oz' }
   ];
 
   useEffect(() => {
@@ -212,9 +189,42 @@ export default function UltraModernWorldMap() {
 
     const path = d3.geoPath().projection(projection);
 
-    // Échelle de couleurs moderne
-    const colorScale = d3.scaleSequential(d3.interpolateViridis)
-      .domain([0, 1]);
+    // Créer une échelle de couleurs basée sur les données PIB réelles
+    const gdpValues = Object.values(gdpData).filter((v: any) => v && v.gdp) as any[];
+    const gdpRange = d3.extent(gdpValues, (d: any) => d.gdp) as [number, number];
+    
+    const colorScale = d3.scaleSequential(d3.interpolateYlOrRd)
+      .domain(gdpRange);
+
+    // Fonction pour obtenir le PIB d'un pays
+    const getCountryGDP = (countryName: string) => {
+      const countryData = gdpData[countryName];
+      return countryData?.gdp || 0;
+    };
+
+    // Fonction pour normaliser les noms de pays
+    const normalizeCountryName = (name: string) => {
+      const normalizations: {[key: string]: string} = {
+        'United States of America': 'United States',
+        'Russian Federation': 'Russia',
+        'China': 'China',
+        'United Kingdom': 'United Kingdom',
+        'Democratic Republic of the Congo': 'Congo (Democratic Republic)',
+        'Republic of the Congo': 'Congo',
+        'Central African Republic': 'Central African Republic',
+        'South Korea': 'Korea (Republic of)',
+        'North Korea': 'Korea (Democratic People\'s Republic of)',
+        'Myanmar': 'Myanmar',
+        'Iran': 'Iran (Islamic Republic of)',
+        'Syria': 'Syrian Arab Republic',
+        'Venezuela': 'Venezuela (Bolivarian Republic of)',
+        'Tanzania': 'Tanzania (United Republic of)',
+        'Bolivia': 'Bolivia (Plurinational State of)',
+        'Vietnam': 'Viet Nam'
+      };
+      
+      return normalizations[name] || name;
+    };
 
     svg.selectAll('.country')
       .data(countries.features)
@@ -222,13 +232,64 @@ export default function UltraModernWorldMap() {
       .append('path')
       .attr('class', 'country')
       .attr('d', path as any)
-      .attr('fill', (d, i) => colorScale(Math.random()))
+      .attr('fill', (d: any) => {
+        const countryName = d.properties?.NAME || d.properties?.name || d.properties?.NAME_EN;
+        const normalizedName = normalizeCountryName(countryName);
+        const gdp = getCountryGDP(normalizedName);
+        return gdp > 0 ? colorScale(gdp) : '#e5e7eb';
+      })
       .attr('stroke', '#ffffff')
       .attr('stroke-width', 0.5)
       .style('cursor', 'pointer')
       .on('click', function(event, d: any) {
-        const countryName = d.properties?.NAME || 'Pays inconnu';
-        setSelectedCountry(countryName);
+        const countryName = d.properties?.NAME || d.properties?.name || d.properties?.NAME_EN || 'Pays inconnu';
+        const normalizedName = normalizeCountryName(countryName);
+        console.log('Pays cliqué:', normalizedName); // Debug
+        
+        // Effet visuel pour confirmer le clic
+        d3.select(this)
+          .transition()
+          .duration(200)
+          .attr('stroke', '#3b82f6')
+          .attr('stroke-width', 3)
+          .transition()
+          .duration(200)
+          .attr('stroke', '#ffffff')
+          .attr('stroke-width', 0.5);
+        
+        setSelectedCountry(normalizedName);
+      })
+      .on('mouseover', function(event, d: any) {
+        const countryName = d.properties?.NAME || d.properties?.name || d.properties?.NAME_EN;
+        const normalizedName = normalizeCountryName(countryName);
+        const gdp = getCountryGDP(normalizedName);
+        
+        // Effet hover
+        d3.select(this)
+          .style('opacity', 0.8)
+          .attr('stroke-width', 1.5);
+          
+        // Tooltip simple
+        if (gdp > 0) {
+          svg.append('text')
+            .attr('id', 'country-tooltip')
+            .attr('x', width / 2)
+            .attr('y', 30)
+            .attr('text-anchor', 'middle')
+            .attr('font-size', '14px')
+            .attr('font-weight', 'bold')
+            .attr('fill', '#1f2937')
+            .attr('background', 'white')
+            .text(`${normalizedName}: $${(gdp / 1e12).toFixed(2)}T PIB`);
+        }
+      })
+      .on('mouseout', function(event, d: any) {
+        d3.select(this)
+          .style('opacity', 1)
+          .attr('stroke-width', 0.5);
+          
+        // Supprimer le tooltip
+        svg.select('#country-tooltip').remove();
       });
   };
 
@@ -329,13 +390,44 @@ export default function UltraModernWorldMap() {
         <div className="bg-white/80 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-xl mb-8">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold text-gray-800">Carte Interactive Mondiale</h2>
-            <div className="flex items-center space-x-2">
-              <Zap className="w-5 h-5 text-yellow-500" />
-              <span className="text-gray-600">Données 2024</span>
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2">
+                <Activity className="w-5 h-5 text-green-500" />
+                <span className="text-gray-600">Données économiques 2024</span>
+              </div>
+              {/* Légende PIB */}
+              <div className="flex items-center space-x-2 text-sm">
+                <span className="text-gray-600">PIB:</span>
+                <div className="flex items-center space-x-1">
+                  <div className="w-4 h-4 bg-yellow-200 rounded"></div>
+                  <span className="text-xs text-gray-500">Faible</span>
+                </div>
+                <div className="flex items-center space-x-1">
+                  <div className="w-4 h-4 bg-orange-400 rounded"></div>
+                  <span className="text-xs text-gray-500">Moyen</span>
+                </div>
+                <div className="flex items-center space-x-1">
+                  <div className="w-4 h-4 bg-red-600 rounded"></div>
+                  <span className="text-xs text-gray-500">Élevé</span>
+                </div>
+              </div>
             </div>
           </div>
           
           <div className="relative">
+            {/* Instructions pour l'utilisateur */}
+            <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-xl">
+              <p className="text-blue-800 text-sm font-medium flex items-center">
+                <Globe className="w-4 h-4 mr-2" />
+                Cliquez sur un pays pour voir ses statistiques détaillées
+                {selectedCountry && (
+                  <span className="ml-4 px-3 py-1 bg-blue-200 text-blue-800 rounded-full text-xs font-bold">
+                    Pays sélectionné: {selectedCountry}
+                  </span>
+                )}
+              </p>
+            </div>
+            
             {loading && (
               <div className="absolute inset-0 bg-white/50 backdrop-blur-sm rounded-xl flex items-center justify-center z-10">
                 <div className="flex items-center space-x-3">
@@ -476,41 +568,16 @@ export default function UltraModernWorldMap() {
           </div>
         </div>
 
-        {/* Informations sur le pays sélectionné */}
-        {selectedCountry && (
-          <div className="mt-8 bg-white/80 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-xl">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-2xl font-bold text-gray-800">Informations sur {selectedCountry}</h3>
-              <button 
-                onClick={() => setSelectedCountry(null)}
-                className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-xl transition-colors"
-              >
-                Fermer
-              </button>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="bg-blue-50 p-4 rounded-xl">
-                <h4 className="font-semibold text-blue-800 mb-2">PIB</h4>
-                <p className="text-2xl font-bold text-blue-600">$2.1T</p>
-                <p className="text-blue-600 text-sm">+2.8% cette année</p>
-              </div>
-              <div className="bg-green-50 p-4 rounded-xl">
-                <h4 className="font-semibold text-green-800 mb-2">Population</h4>
-                <p className="text-2xl font-bold text-green-600">67.8M</p>
-                <p className="text-green-600 text-sm">+0.3% cette année</p>
-              </div>
-              <div className="bg-purple-50 p-4 rounded-xl">
-                <h4 className="font-semibold text-purple-800 mb-2">PIB/habitant</h4>
-                <p className="text-2xl font-bold text-purple-600">$31,000</p>
-                <p className="text-purple-600 text-sm">+2.5% cette année</p>
-              </div>
-            </div>
-          </div>
-        )}
+
       </div>
       
-      {/* Widget flottant avec données en temps réel */}
-      <FloatingDashboard />
+      {/* Panneau de détails du pays */}
+      {selectedCountry && (
+        <CountryDetailsPanel 
+          countryName={selectedCountry}
+          onClose={() => setSelectedCountry(null)}
+        />
+      )}
     </div>
   );
 }

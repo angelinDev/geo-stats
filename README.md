@@ -1,31 +1,65 @@
-# Carte Interactive du Monde - PIB par Pays
+# Carte Interactive du Monde - Statistiques Géopolitiques
 
 ## 🗺️ Description
 
-Application web interactive ultra-moderne affichant les données de PIB mondial avec des informations détaillées par pays. Utilise D3.js pour la visualisation cartographique avancée et des APIs publiques pour récupérer les informations en temps réel des pays.
+Application web interactive ultra-moderne affichant des statistiques géopolitiques complètes avec des informations détaillées par pays. Utilise D3.js pour la visualisation cartographique avancée et intègre des APIs réelles (World Bank, REST Countries) pour récupérer des données démographiques, économiques, sociales et environnementales en temps réel.
+
+## 🌟 Fonctionnalités Principales
+
+### 📊 Données Complètes par Pays
+- **Statistiques démographiques** : Population, densité, âge médian, natalité/mortalité, espérance de vie
+- **Indicateurs économiques** : PIB, croissance, inflation, chômage, dette publique
+- **Données sociales** : Alphabétisation, IDH, accès internet, dépenses santé/éducation
+- **Informations environnementales** : Émissions CO₂, énergies renouvelables, couverture forestière
+- **Indicateurs de gouvernance** : Indices de corruption, démocratie, liberté de presse
+
+### 🎯 Sources de Données Réelles
+- **World Bank API** : Plus de 20 indicateurs officiels
+- **REST Countries API** : Informations de base (capitale, langues, monnaies, drapeaux)
+- **Données historiques** : Évolution du PIB sur 10 ans avec graphiques
+- **Mise à jour automatique** : Données les plus récentes disponibles (2020-2023)
 
 ## ✨ Nouvelles Fonctionnalités
 
-### �️ Contrôles Avancés
-- **Sélecteur d'année** : Visualisez l'évolution du PIB de 1960 à 2024
-- **Lecture automatique** : Animation temporelle des données économiques
-- **Zoom intelligent** : Contrôles de zoom avec boutons dédiés
-- **Recherche de pays** : Trouvez rapidement un pays spécifique
-- **Export de carte** : Sauvegardez la carte en format SVG
-- **Paramètres personnalisables** : Interface complète de configuration
+### 🗺️ Carte Interactive Ultra-Moderne
+- **Carte mondiale D3.js** avec projection naturelle et rendu vectoriel
+- **Coloration basée sur le PIB réel** : échelle de couleur dynamique jaune → orange → rouge
+- **Interaction au clic** : Sélectionnez un pays pour voir ses statistiques détaillées
+- **Tooltips informatifs** au survol avec nom du pays et PIB
+- **Animations fluides** lors des interactions et du clic
+- **Normalisation des noms** : Mapping intelligent pour correspondance API
+- **Légende visuelle** : Indication claire des niveaux de PIB
 
-### 🎨 Personnalisation Visuelle
-- **5 schémas de couleurs** : Rouge-Bleu, Vert-Jaune, Violet-Rose, Bleu-Cyan, Orange-Rouge
-- **Métriques variables** : PIB total, PIB par habitant, Population, Superficie
-- **Légende dynamique** : S'adapte automatiquement aux données
-- **Tooltips configurables** : Activables/désactivables
-- **Animations fluides** : Transitions douces entre les états
+### 📊 Panneau de Détails des Pays (NOUVEAU)
+- **APIs réelles intégrées** : World Bank API + REST Countries API
+- **5 catégories complètes d'informations** :
+  - 🏛️ **Aperçu** : Informations de base, drapeau, carte de localisation
+  - 👥 **Démographie** : Population, densité, âge médian, distribution par âge
+  - 💰 **Économie** : PIB, croissance, inflation, secteurs économiques, historique
+  - 🎓 **Social** : Éducation, santé, développement humain, indicateurs sociaux
+  - 🌱 **Environnement** : Émissions CO2, énergies renouvelables, couverture forestière
+- **Graphiques interactifs** : Barres, lignes, circulaires, radiaux avec Recharts
+- **Design glassmorphism** : Interface moderne avec transparence et flou
+- **Gestion d'erreurs robuste** : Fallback et récupération gracieuse
 
-### 📊 Tableau de Bord Statistiques
-- **Vue d'ensemble mondiale** : Statistiques globales en temps réel
-- **Top 5 des économies** : Graphique en barres interactif
-- **Répartition par région** : Graphique circulaire détaillé
-- **Métriques clés** : Nombre de pays, PIB total, moyennes
+### 🚫 Suppression Complète des Données de Marché
+- **Aucune donnée financière** : Plus de bourse, crypto, matières premières
+- **Focus économique réel** : Statistiques nationales et indicateurs macroéconomiques
+- **Nettoyage complet** : Suppression de tous les composants liés aux marchés
+
+### � Dashboard Global Amélioré
+- **Statistiques mondiales** : PIB total, population, nombre de pays
+- **Top 5 des économies** : Graphique en barres des plus grandes économies
+- **Évolution temporelle** : Graphique de l'évolution du PIB mondial sur 6 ans
+- **Répartition continentale** : Graphique circulaire par continent
+- **Indicateurs économiques** : Inflation et chômage avec courbes temporelles
+
+### 🎨 Design et UX Ultra-Moderne
+- **Glassmorphism avancé** : Effets de transparence et flou sophistiqués
+- **Animations CSS3** : Transitions fluides et microinteractions
+- **Palette moderne** : Dégradés bleu-violet avec accents colorés
+- **Interface responsive** : Adaptation parfaite mobile/desktop
+- **Icônes cohérentes** : Lucide React pour tous les éléments visuels
 
 ## 🛠️ Technologies Utilisées
 
@@ -83,6 +117,44 @@ npm run dev
 
 ### Accès
 Ouvrir [http://localhost:3000](http://localhost:3000) dans le navigateur.
+
+## 🧪 Comment Tester les Fonctionnalités
+
+### Test du Clic sur un Pays
+1. **Lancez l'application** et attendez que la carte se charge
+2. **Observez la coloration** : les pays sont colorés selon leur PIB (jaune → orange → rouge)
+3. **Survolez un pays** : un tooltip s'affiche avec le nom et le PIB
+4. **Cliquez sur un pays** : 
+   - Animation bleue temporaire sur le pays cliqué
+   - Le nom du pays apparaît dans la barre d'information bleue
+   - Le panneau de détails s'ouvre sur la droite avec un effet slide
+
+### Test du Panneau de Détails
+1. **Vérifiez les onglets** : Aperçu, Démographie, Économie, Social, Environnement
+2. **Testez les graphiques** : ils doivent être interactifs avec des tooltips
+3. **Fermez le panneau** : bouton X ou clic sur l'arrière-plan
+4. **Testez différents pays** : États-Unis, France, Chine, Royaume-Uni, etc.
+
+### Script de Test Automatique
+Copiez et collez ce code dans la console du navigateur (F12) :
+```javascript
+// Charger le script de test
+fetch('/test-functionality.js')
+  .then(response => response.text())
+  .then(script => eval(script))
+  .catch(() => console.log('Script de test non trouvé, tests manuels uniquement'));
+```
+
+### Vérification des APIs
+- **World Bank API** : Données économiques et sociales officielles
+- **REST Countries API** : Informations de base sur les pays
+- **Pas de données de marché** : Aucune information sur les bourses, crypto ou matières premières
+
+### Tests Recommandés
+- **France** : Données complètes disponibles
+- **États-Unis** : Grande économie avec historique complet
+- **Petits pays** : Vérifier la gestion des données manquantes
+- **Pays avec noms spéciaux** : "Democratic Republic of the Congo", etc.
 
 ## 📊 Sources de Données
 
