@@ -303,112 +303,118 @@ export default function UltraModernWorldMap() {
   const COLORS = ['#3b82f6', '#ef4444', '#10b981', '#f59e0b', '#8b5cf6', '#06b6d4'];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 transition-colors duration-300">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 transition-colors duration-300 container-responsive">
       {/* Header moderne */}
       <div className="bg-gray-800/80 backdrop-blur-lg border-b border-gray-700/20 shadow-xl">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
-                <Globe className="w-6 h-6 text-white" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between space-y-4 sm:space-y-0">
+            <div className="flex items-center space-x-3 sm:space-x-4 min-w-0 flex-1">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                <Globe className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
-              <div>
-                <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <div className="min-w-0 flex-1">
+                <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent text-responsive">
                   Atlas Économique Mondial
                 </h1>
-                <p className="text-gray-300">Données économiques mondiales en temps réel</p>
+                <p className="text-sm sm:text-base text-gray-300 text-responsive">Données économiques mondiales en temps réel</p>
               </div>
             </div>
             
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2 bg-green-900/30 px-4 py-2 rounded-full">
-                <Activity className="w-4 h-4 text-green-400" />
-                <span className="text-green-200 font-medium">Live</span>
+            <div className="flex items-center space-x-4 flex-shrink-0">
+              <div className="flex items-center space-x-2 bg-green-900/30 px-3 sm:px-4 py-2 rounded-full">
+                <Activity className="w-3 h-3 sm:w-4 sm:h-4 text-green-400" />
+                <span className="text-sm text-green-200 font-medium">Live</span>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 container-responsive">
         {/* Statistiques globales modernes */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <div className="bg-gray-800/80 backdrop-blur-lg rounded-2xl p-6 border border-gray-700/20 shadow-xl">
+        <div className="responsive-grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 mb-6 sm:mb-8">
+          <div className="bg-gray-800/80 backdrop-blur-lg rounded-2xl p-4 sm:p-6 border border-gray-700/20 shadow-xl">
             <div className="flex items-center justify-between">
-              <div>
-                <p className="text-gray-300 text-sm font-medium">PIB Mondial Total</p>
-                <p className="text-3xl font-bold text-blue-400">${formatNumber(demoGlobalStats.totalGDP)}</p>
-                <p className="text-green-400 text-sm font-medium">+3.2% cette année</p>
+              <div className="min-w-0 flex-1">
+                <p className="text-gray-300 text-xs sm:text-sm font-medium">PIB Mondial Total</p>
+                <p className="text-lg sm:text-xl lg:text-3xl font-bold text-blue-400 text-responsive">${formatNumber(demoGlobalStats.totalGDP)}</p>
+                <p className="text-green-400 text-xs sm:text-sm font-medium">+3.2% cette année</p>
               </div>
-              <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
-                <DollarSign className="w-6 h-6 text-white" />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl flex items-center justify-center flex-shrink-0 ml-2">
+                <DollarSign className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
             </div>
           </div>
 
-          <div className="bg-gray-800/80 backdrop-blur-lg rounded-2xl p-6 border border-gray-700/20 shadow-xl">
+          <div className="bg-gray-800/80 backdrop-blur-lg rounded-2xl p-4 sm:p-6 border border-gray-700/20 shadow-xl">
             <div className="flex items-center justify-between">
-              <div>
-                <p className="text-gray-300 text-sm font-medium">Population Mondiale</p>
-                <p className="text-3xl font-bold text-green-400">{formatNumber(demoGlobalStats.totalPopulation)}</p>
-                <p className="text-blue-400 text-sm font-medium">+0.9% cette année</p>
+              <div className="min-w-0 flex-1">
+                <p className="text-gray-300 text-xs sm:text-sm font-medium">Population Mondiale</p>
+                <p className="text-lg sm:text-xl lg:text-3xl font-bold text-green-400 text-responsive">{formatNumber(demoGlobalStats.totalPopulation)}</p>
+                <p className="text-blue-400 text-xs sm:text-sm font-medium">+0.9% cette année</p>
               </div>
-              <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-green-600 rounded-xl flex items-center justify-center">
-                <Users className="w-6 h-6 text-white" />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-green-500 to-green-600 rounded-xl flex items-center justify-center flex-shrink-0 ml-2">
+                <Users className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
             </div>
           </div>
 
-          <div className="bg-gray-800/80 backdrop-blur-lg rounded-2xl p-6 border border-gray-700/20 shadow-xl">
+          <div className="bg-gray-800/80 backdrop-blur-lg rounded-2xl p-4 sm:p-6 border border-gray-700/20 shadow-xl">
             <div className="flex items-center justify-between">
-              <div>
-                <p className="text-gray-300 text-sm font-medium">Nombre de Pays</p>
-                <p className="text-3xl font-bold text-purple-400">{demoGlobalStats.totalCountries}</p>
-                <p className="text-gray-400 text-sm font-medium">Avec données PIB</p>
+              <div className="min-w-0 flex-1">
+                <p className="text-gray-300 text-xs sm:text-sm font-medium">Nombre de Pays</p>
+                <p className="text-lg sm:text-xl lg:text-3xl font-bold text-purple-400">{demoGlobalStats.totalCountries}</p>
+                <p className="text-gray-400 text-xs sm:text-sm font-medium">Avec données PIB</p>
               </div>
-              <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl flex items-center justify-center">
-                <Globe className="w-6 h-6 text-white" />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl flex items-center justify-center flex-shrink-0 ml-2">
+                <Globe className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
             </div>
           </div>
 
-          <div className="bg-gray-800/80 backdrop-blur-lg rounded-2xl p-6 border border-gray-700/20 shadow-xl">
+          <div className="bg-gray-800/80 backdrop-blur-lg rounded-2xl p-4 sm:p-6 border border-gray-700/20 shadow-xl">
             <div className="flex items-center justify-between">
-              <div>
-                <p className="text-gray-300 text-sm font-medium">PIB Moyen</p>
-                <p className="text-3xl font-bold text-orange-400">${formatNumber(demoGlobalStats.averageGDP)}</p>
-                <p className="text-orange-400 text-sm font-medium">Par pays</p>
+              <div className="min-w-0 flex-1">
+                <p className="text-gray-300 text-xs sm:text-sm font-medium">PIB Moyen</p>
+                <p className="text-lg sm:text-xl lg:text-3xl font-bold text-orange-400 text-responsive">${formatNumber(demoGlobalStats.averageGDP)}</p>
+                <p className="text-orange-400 text-xs sm:text-sm font-medium">Par pays</p>
               </div>
-              <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-orange-600 rounded-xl flex items-center justify-center">
-                <TrendingUp className="w-6 h-6 text-white" />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-orange-500 to-orange-600 rounded-xl flex items-center justify-center flex-shrink-0 ml-2">
+                <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
             </div>
           </div>
         </div>
 
         {/* Carte principale */}
-        <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg rounded-2xl p-6 border border-white/20 dark:border-gray-700/20 shadow-xl mb-8">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100">Carte Interactive Mondiale</h2>
-            <div className="flex items-center space-x-4">
+        <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg rounded-2xl p-4 sm:p-6 border border-white/20 dark:border-gray-700/20 shadow-xl mb-8">
+          {/* Header responsive */}
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0 mb-6">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-gray-100">Carte Interactive Mondiale</h2>
+            
+            {/* Indicateurs responsive */}
+            <div className="flex flex-col sm:flex-row sm:items-center space-y-3 sm:space-y-0 sm:space-x-4">
               <div className="flex items-center space-x-2">
-                <Activity className="w-5 h-5 text-green-500" />
-                <span className="text-gray-600 dark:text-gray-300">Données économiques 2024</span>
+                <Activity className="w-4 h-4 sm:w-5 sm:h-5 text-green-500 flex-shrink-0" />
+                <span className="text-gray-600 dark:text-gray-300 text-sm">Données économiques 2024</span>
               </div>
-              {/* Légende PIB */}
-              <div className="flex items-center space-x-2 text-sm">
-                <span className="text-gray-600 dark:text-gray-300">PIB:</span>
-                <div className="flex items-center space-x-1">
-                  <div className="w-4 h-4 bg-yellow-200 dark:bg-yellow-600 rounded"></div>
-                  <span className="text-xs text-gray-500 dark:text-gray-400">Faible</span>
-                </div>
-                <div className="flex items-center space-x-1">
-                  <div className="w-4 h-4 bg-orange-400 dark:bg-orange-500 rounded"></div>
-                  <span className="text-xs text-gray-500 dark:text-gray-400">Moyen</span>
-                </div>
-                <div className="flex items-center space-x-1">
-                  <div className="w-4 h-4 bg-red-600 rounded"></div>
-                  <span className="text-xs text-gray-500 dark:text-gray-400">Élevé</span>
+              
+              {/* Légende PIB responsive */}
+              <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-3">
+                <span className="text-gray-600 dark:text-gray-300 text-sm font-medium">Légende PIB:</span>
+                <div className="flex items-center space-x-3 sm:space-x-2">
+                  <div className="flex items-center space-x-1">
+                    <div className="w-3 h-3 sm:w-4 sm:h-4 bg-yellow-200 dark:bg-yellow-600 rounded flex-shrink-0"></div>
+                    <span className="text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap">Faible</span>
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    <div className="w-3 h-3 sm:w-4 sm:h-4 bg-orange-400 dark:bg-orange-500 rounded flex-shrink-0"></div>
+                    <span className="text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap">Moyen</span>
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    <div className="w-3 h-3 sm:w-4 sm:h-4 bg-red-600 rounded flex-shrink-0"></div>
+                    <span className="text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap">Élevé</span>
+                  </div>
                 </div>
               </div>
             </div>

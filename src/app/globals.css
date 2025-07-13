@@ -5,12 +5,33 @@ html {
   background-color: #0f172a;
   color: white;
   color-scheme: dark;
+  overflow-x: hidden; /* Prévient le débordement horizontal */
 }
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background-color: inherit;
   color: inherit;
+  overflow-x: hidden; /* Prévient le débordement horizontal */
+  min-width: 0; /* Permet la compression des contenus */
+}
+
+/* Responsive container rules */
+* {
+  box-sizing: border-box;
+}
+
+.container-responsive {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Responsive text truncation */
+.text-responsive {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 /* Ultra-modern animations and effects */
@@ -227,6 +248,37 @@ body {
   
   .modern-card:hover {
     transform: translateY(-4px);
+  }
+}
+
+/* SVG responsive */
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Responsive charts */
+.recharts-responsive-container {
+  min-width: 0 !important;
+}
+
+/* Responsive grid */
+.responsive-grid {
+  display: grid;
+  gap: 1rem;
+  width: 100%;
+  min-width: 0;
+}
+
+@media (min-width: 640px) {
+  .responsive-grid {
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-grid {
+    gap: 2rem;
   }
 }
 

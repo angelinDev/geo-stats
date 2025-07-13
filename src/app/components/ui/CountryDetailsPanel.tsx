@@ -501,43 +501,43 @@ export default function CountryDetailsPanel({ countryName, onClose }: CountryDet
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 overflow-y-auto">
-      <div className="min-h-screen py-6 px-4">
-        <div className="max-w-6xl mx-auto">
+      <div className="min-h-screen py-4 px-2 sm:py-6 sm:px-4">
+        <div className="max-w-4xl lg:max-w-6xl mx-auto">
           <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden">
             {/* Header */}
-            <div className="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-700 dark:to-purple-700 px-6 py-8 text-white">
+            <div className="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-700 dark:to-purple-700 px-4 sm:px-6 py-6 sm:py-8 text-white">
               <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-4">
-                  <span className="text-6xl">{countryData.basicInfo.flag}</span>
-                  <div>
-                    <h1 className="text-3xl font-bold">{countryData.basicInfo.name}</h1>
-                    <p className="text-blue-100 dark:text-blue-200 text-lg">{countryData.basicInfo.capital} • {countryData.basicInfo.region}</p>
-                    <p className="text-blue-200 dark:text-blue-300 text-sm">Population: {formatNumber(countryData.demographics.population)} habitants</p>
+                <div className="flex items-center space-x-3 sm:space-x-4 min-w-0 flex-1">
+                  <span className="text-4xl sm:text-5xl lg:text-6xl">{countryData.basicInfo.flag}</span>
+                  <div className="min-w-0 flex-1">
+                    <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold truncate">{countryData.basicInfo.name}</h1>
+                    <p className="text-blue-100 dark:text-blue-200 text-sm sm:text-base lg:text-lg truncate">{countryData.basicInfo.capital} • {countryData.basicInfo.region}</p>
+                    <p className="text-blue-200 dark:text-blue-300 text-xs sm:text-sm">Population: {formatNumber(countryData.demographics.population)} habitants</p>
                   </div>
                 </div>
                 <button
                   onClick={onClose}
-                  className="w-10 h-10 bg-white/20 dark:bg-white/30 rounded-full flex items-center justify-center hover:bg-white/30 dark:hover:bg-white/40 transition-colors"
+                  className="w-8 h-8 sm:w-10 sm:h-10 bg-white/20 dark:bg-white/30 rounded-full flex items-center justify-center hover:bg-white/30 dark:hover:bg-white/40 transition-colors flex-shrink-0"
                 >
-                  <X className="w-6 h-6" />
+                  <X className="w-5 h-5 sm:w-6 sm:h-6" />
                 </button>
               </div>
             </div>
 
-            <div className="p-6 dark:bg-gray-800">{/* Informations de base */}
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-                <div className="bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/30 rounded-xl p-4">
-                  <div className="flex items-center space-x-3">
-                    <MapPin className="w-8 h-8 text-blue-600 dark:text-blue-400" />
-                    <div>
-                      <p className="text-sm text-blue-800 dark:text-blue-300 font-medium">Superficie</p>
-                      <p className="text-xl font-bold text-blue-900 dark:text-blue-100">{countryData.basicInfo.area.toLocaleString()} km²</p>
+            <div className="p-4 sm:p-6 dark:bg-gray-800">{/* Informations de base */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
+                <div className="bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/30 rounded-xl p-3 sm:p-4">
+                  <div className="flex items-center space-x-2 sm:space-x-3">
+                    <MapPin className="w-6 h-6 sm:w-8 sm:h-8 text-blue-600 dark:text-blue-400 flex-shrink-0" />
+                    <div className="min-w-0 flex-1">
+                      <p className="text-xs sm:text-sm text-blue-800 dark:text-blue-300 font-medium">Superficie</p>
+                      <p className="text-lg sm:text-xl font-bold text-blue-900 dark:text-blue-100 truncate">{countryData.basicInfo.area.toLocaleString()} km²</p>
                     </div>
                   </div>
                 </div>
                 
-                <div className="bg-gradient-to-r from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/30 rounded-xl p-4">
-                  <div className="flex items-center space-x-3">
+                <div className="bg-gradient-to-r from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/30 rounded-xl p-3 sm:p-4">
+                  <div className="flex items-center space-x-2 sm:space-x-3">
                     <Users className="w-8 h-8 text-green-600 dark:text-green-400" />
                     <div>
                       <p className="text-sm text-green-800 dark:text-green-300 font-medium">Densité</p>
