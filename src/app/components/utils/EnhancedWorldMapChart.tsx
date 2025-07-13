@@ -436,8 +436,8 @@ export default function EnhancedWorldMapChart() {
       <div className="mt-6">
         {selectedCountry && selectedCountry !== 'world' ? (
           <CountryDetailsPanel 
-            selectedCountry={selectedCountry} 
-            gdpData={gdpData}
+            countryName={selectedCountry} 
+            onClose={() => setSelectedCountry(null)}
           />
         ) : (
           gdpData && (

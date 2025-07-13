@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 import * as topojson from 'topojson-client';
 import ExtraDataPanel from '../ui/ExtraDataPanel';
-import GlobalStatsWidget from '../ui/GlobalStatsWidget';
+import StatisticsDashboard from '../ui/StatisticsDashboard';
 import { 
   Globe, Users, DollarSign, TrendingUp, Building2, Map, 
   BarChart3, PieChart, Activity, Zap, Target, Award,
@@ -149,8 +149,8 @@ export default function UltraModernWorldMap({}: ModernMapProps) {
     const path = d3.geoPath().projection(projection);
 
     // Créer les données par pays
-    const dataMap = new Map();
-    const countryDataMap = new Map();
+    const dataMap = new (globalThis.Map)<string, number>();
+    const countryDataMap = new (globalThis.Map)<string, any>();
     
     countries.features.forEach((feature: any) => {
       const geoName = feature.properties?.NAME || feature.properties?.name || 'Unknown';
@@ -597,7 +597,7 @@ export default function UltraModernWorldMap({}: ModernMapProps) {
                   </button>
                 </div>
                 
-                <GlobalStatsWidget 
+                <StatisticsDashboard 
                   gdpData={gdpData} 
                   selectedYear={selectedYear} 
                 />

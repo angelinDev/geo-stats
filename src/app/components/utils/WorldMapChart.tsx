@@ -441,8 +441,8 @@ export default function WorldMapChart() {
         {/* Panneau d'informations */}
         <div className="w-96 h-full">
           <CountryDetailsPanel 
-            selectedCountry={selectedCountry} 
-            gdpData={gdpData}
+            countryName={selectedCountry || ''} 
+            onClose={() => {}}
           />
         </div>
       </div>
