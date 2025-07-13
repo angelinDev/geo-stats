@@ -1,8 +1,25 @@
-# Carte Interactive du Monde - Statistiques Géopolitiques
+# 🌍 Atlas Économique Mondial - Données Réalistes
 
-## 🗺️ Description
+## � Description
 
-Application web interactive ultra-moderne affichant des statistiques géopolitiques complètes avec des informations détaillées par pays. Utilise D3.js pour la visualisation cartographique avancée et intègre des APIs réelles (World Bank, REST Countries) pour récupérer des données démographiques, économiques, sociales et environnementales en temps réel.
+Application web interactive ultra-moderne avec **mode sombre exclusif** affichant des statistiques géopolitiques complètes et **réalistes** pour tous les pays du monde. Utilise D3.js pour la visualisation cartographique avancée et intègre un système intelligent de génération de données basé sur le niveau de développement de chaque région.
+
+## 🎯 Données Réalistes et Variables
+
+### 💰 PIB par Habitant Intelligent
+- **Pays développés** (Europe, Amérique du Nord) : 30,000$ - 80,000$ USD
+- **Pays moyennement développés** (Asie) : 10,000$ - 30,000$ USD  
+- **Pays en développement** (Afrique, Amérique du Sud) : 1,000$ - 10,000$ USD
+
+### 👥 Espérance de Vie Cohérente
+- **Pays développés** : 75-85 ans
+- **Pays moyennement développés** : 65-80 ans
+- **Pays en développement** : 55-70 ans
+
+### 📈 Système de Fallback Robuste
+- **APIs primaires** : World Bank, REST Countries
+- **Génération intelligente** : Données cohérentes même hors-ligne
+- **Classification automatique** : Basée sur la géographie et la région
 
 ## 🌟 Fonctionnalités Principales
 
